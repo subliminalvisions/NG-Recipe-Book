@@ -6,7 +6,7 @@
 
       <!-- ngif currentCompo  -->
 
-      <app-recipes *ngIf="currentCompo=='recipes'"></app-recipes>
+      <app-recipes *ngIf="currentCompo!='shopping'"></app-recipes>
       <app-shopping-list *ngIf="currentCompo=='shopping'"></app-shopping-list>
     </div>
   </div>
