@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'recipe book app';
+  currentCompo: string; 
+
+  showCurrentCompo($event) {
+    this.currentCompo = $event;
+    console.log(this.currentCompo);
+  }
+
 }

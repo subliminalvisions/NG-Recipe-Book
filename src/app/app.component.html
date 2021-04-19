@@ -1,11 +1,13 @@
-<app-header></app-header>
+<app-header (stateEvent)='showCurrentCompo($event)'></app-header>
 
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <!-- <h2>{{ title }} </h2> -->
-      <app-recipes></app-recipes>
-      <app-shopping-list></app-shopping-list>
+
+      <!-- ngif currentCompo  -->
+
+      <app-recipes *ngIf="currentCompo=='recipes'"></app-recipes>
+      <app-shopping-list *ngIf="currentCompo=='shopping'"></app-shopping-list>
     </div>
   </div>
 </div>
