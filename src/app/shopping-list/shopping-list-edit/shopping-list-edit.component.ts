@@ -9,14 +9,9 @@ import { Ingredient } from '../../shared/ingredient.model';
 })
 export class ShoppingListEditComponent implements OnInit {
 
-  // add EventEmitter
-  @Output() outputIngred:EventEmitter<any> = new EventEmitter<Ingredient>();
-  // @Output() emitCount:EventEmitter<any> = new EventEmitter<number>();
-  // Reference firstNameInput variable inside Component
-  @ViewChild('nameInput') nameInput: ElementRef;
-  @ViewChild('amountInput') amountInput: ElementRef;
-  // @ViewChild('amountInput') amountInput: ElementRef;
-  newIngrid: Ingredient;
+  @ViewChild('nameInput', {static:false}) nameInput: ElementRef;
+  @ViewChild('amountInput', {static:false}) amountInput: ElementRef;
+  @Output() outputIngred = new EventEmitter<Ingredient>();
 
   constructor() { }
 
@@ -24,24 +19,13 @@ export class ShoppingListEditComponent implements OnInit {
   }
 
   onPushIngredFromList() {
-
     const name = this.nameInput.nativeElement.value;
     const amount = this.amountInput.nativeElement.value;
-    console.log(name);
-    console.log(amount);
-
-    this.newIngrid = {name: name, amount: amount};
-    // this.newIngrid.name = name;
-    // this.newIngrid.amount = amount;
-    // this.newIngrid.name = 'test 11';
-    // this.newIngrid.amount =  3;
-    // // name: string, public amount
-
-    // console.log(this.newIngrid);
-    
-    this.outputIngred.emit(this.newIngrid); 
-    // console.log(this.outputIngred);
-
+    const newIngredient = new Ingredient(
+      name, 
+      amount);
+    // this.newIngrid = {name: name, amount: amount};
+    this.outputIngred.emit(newIngredient); 
   }
 
 }

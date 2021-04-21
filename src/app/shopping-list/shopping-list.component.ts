@@ -1,6 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import { ShoppingListEditComponent } from './shopping-list-edit/shopping-list-edit.component';
-
+import { Component, OnInit } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
 
 @Component({
@@ -8,14 +6,9 @@ import { Ingredient } from '../shared/ingredient.model';
   templateUrl: './shopping-list.component.html',
   styleUrls: ['./shopping-list.component.css']
 })
-export class ShoppingListComponent implements OnInit, AfterViewInit {
+export class ShoppingListComponent implements OnInit {
 
-  // Listen to Ingred from ViewChild
-  // Push Ingred to onPushIngred()
-  // @ViewChild('nameInput', {static: false}) childIngred: Ingredient;
-  // @ViewChild('pRef', {static: false}) pRef: ElementRef;
   childIngred: Ingredient;
-  
   ingredients: Ingredient[] = [
     new Ingredient('Apples', 5),
     new Ingredient('Tomatoes', 11)
@@ -24,17 +17,8 @@ export class ShoppingListComponent implements OnInit, AfterViewInit {
   constructor() { }
 
   ngOnInit(): void {
-    // console.log('Hello ', this.childIngred.name); 
   }
-  // countChange(event) {
-  //   this.childIngred = event;
-  //   this.pushNum(this.myCount);
-  // }
-  ngAfterViewInit(): void {
-    // console.log(this.pRef.nativeElement.innerHTML); 
-    // this.pRef.nativeElement.innerHTML = "DOM updated successfully!!!"; 
-  }
-
+  // see tpt: <app-shopping-list-edit>
   onPushIngred(data: Ingredient){
     this.ingredients.push(data);
     console.log(data);
