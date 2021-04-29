@@ -13,6 +13,10 @@ export class ShoppingListService {
         this.ingredients.push(ingredient);
         this.ingredientsChanged.emit(this.ingredients.slice());
     }
+    addMultiples(ingredients: Ingredient[]) {
+        this.ingredients.push(...ingredients)
+        this.ingredientsChanged.emit(this.ingredients.slice());
+    }
     getIngredients() {
         // reminder: slice returns a copy (non-mutating)
         return this.ingredients.slice();
