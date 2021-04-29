@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingListEditComponent } from './shopping-list/shopping-list-edit/shopping-list-edit.component';
-import { IngredientComponent } from './shopping-list/ingredient/ingredient.component';
 import { RecipeBookComponent } from './recipe-book/recipe-book.component';
 import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
 import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
@@ -14,6 +13,7 @@ import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.com
 import { RecipesComponent } from './recipes/recipes.component';
 import { AddRecipeComponent } from './recipes/add-recipe/add-recipe.component';
 import { DropdownDirective } from './shared/dropdown.directive';
+import { ShoppingListService } from './shopping-list/shopping-list.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,6 @@ import { DropdownDirective } from './shared/dropdown.directive';
     HeaderComponent,
     ShoppingListComponent,
     ShoppingListEditComponent,
-    IngredientComponent,
     RecipeBookComponent,
     RecipeListComponent,
     RecipeItemComponent,
@@ -34,7 +33,7 @@ import { DropdownDirective } from './shared/dropdown.directive';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [ShoppingListService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
