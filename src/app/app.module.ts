@@ -16,6 +16,9 @@ import { AddRecipeComponent } from './recipes/add-recipe/add-recipe.component';
 import { DropdownDirective } from './shared/dropdown.directive';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { RecipeService } from './recipes/recipe.service';
+import { NoRecipeSelectedComponent } from './recipes/no-recipe-selected/no-recipe-selected.component';
+import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +31,9 @@ import { RecipeService } from './recipes/recipe.service';
     RecipeDetailComponent,
     RecipesComponent,
     AddRecipeComponent,
-    DropdownDirective
+    DropdownDirective,
+    NoRecipeSelectedComponent,
+    RecipeEditComponent
   ],
   imports: [
     BrowserModule,

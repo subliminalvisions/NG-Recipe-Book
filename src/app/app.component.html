@@ -1,13 +1,10 @@
 <!-- <app-header (stateEvent)='showCurrentCompo($event)'></app-header> -->
 <app-header></app-header>
-
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-
-      <!-- ngif currentCompo  -->
       <router-outlet #outlet="outlet"></router-outlet>
-
+      <!-- ngif currentCompo  -->
       <!-- <app-recipes *ngIf="currentCompo!='shopping'"></app-recipes>
       <app-shopping-list *ngIf="currentCompo=='shopping'"></app-shopping-list> -->
     </div>

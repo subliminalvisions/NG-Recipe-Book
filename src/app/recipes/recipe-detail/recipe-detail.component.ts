@@ -14,6 +14,7 @@ export class RecipeDetailComponent implements OnInit {
   // @Input() recipe: Recipe;
   recipe: Recipe;
   paramsSubscirption: Subscription;
+  id: number;
 
   constructor(
     private slService: ShoppingListService,
@@ -24,13 +25,15 @@ export class RecipeDetailComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.route.snapshot.queryParams);
+    // this.paramsSubscirption = this.route.snapshot.params
+
     this.paramsSubscirption = this.route.params
     .subscribe(
       (params: Params) => {
-        if (params['id']) {
-          const id = +params['id'];
-          this.recipe = this.recipeService.getRecipebyID(id);
-        }
+        this.id = +params['id'];
+        this.recipe = this.recipeService.getRecipebyID(this.id);
+        // if (params['id']) {
+        // }
         // else {
         //   this.server = this.serversService.getServer(1);
         // }

@@ -11,19 +11,20 @@ import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-it
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { AddRecipeComponent } from './recipes/add-recipe/add-recipe.component';
+import { NoRecipeSelectedComponent } from './recipes/no-recipe-selected/no-recipe-selected.component';
+import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'shopping-list' },
+  { path: '', pathMatch: 'full', redirectTo: 'recipes' },
   { path: 'shopping-list', component: ShoppingListComponent },
-  { path: 'recipes', component: RecipesComponent, children: [
-      { path: ':id/edit', component: RecipeDetailComponent },
+  { path: 'recipes', component: RecipesComponent,
+    children: [
+      { path: '', pathMatch: 'full', redirectTo: 'no-recipe' },
+      { path: 'no-recipe', component: NoRecipeSelectedComponent },
+      { path: 'new', component: RecipeEditComponent },
+      { path: ':id', component: RecipeDetailComponent },
+      { path: ':id/edit', component: RecipeEditComponent },
     ] },
-  //   { path: ':id/edit', component: EditServerComponent, canDeactivate: [CanDeactivateGuard] }
-  // ]},
-  // { path: 'users', component: UsersComponent, children: [
-  //   { path: ':id/:name', component: UserComponent },
-  // ] },
-
 ];
 
 @NgModule({

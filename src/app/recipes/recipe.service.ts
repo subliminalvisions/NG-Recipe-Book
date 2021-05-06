@@ -34,17 +34,18 @@ export class RecipeService {
 
     constructor(private slService: ShoppingListService) {}
 
-    getRecipes() {
+    getRecipes(): Recipe[] {
         // reminder: slice returns a copy
         return this.recipes.slice();
     }
-    getRecipebyID(id: number): Recipe {
-      const recipeWithID = this.recipes.find(
-        (s) => {
-          return s.id === id;
-        }
-      );
-      return recipeWithID;
+    getRecipebyID(index: number): Recipe {
+      return this.recipes[index];
+      // const recipeWithID = this.recipes.find(
+      //   (s) => {
+      //     return s.id === id;
+      //   }
+      // );
+      // return recipeWithID;
     }
 
     addIngredientsToShopList(ingredients: Ingredient[]) {
