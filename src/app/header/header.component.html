@@ -8,8 +8,15 @@
         </div>
         <div class="navbar-collapse" [class.collapse]="collapsed" (window:resize)="collapsed = true">
             <ul class="nav navbar-nav">
-                <li><a href="#" (click)="emitState('recipes')">Recipes</a></li>
-                <li><a href="#" (click)="emitState('shopping')">Shopping List</a></li>
+                <li>
+                  <a routerLink='/recipes' >Recipes</a>
+                  <!-- <a href="#" (click)="emitState('recipes')">Recipes</a> -->
+                </li>
+                <li>
+                  <a routerLink='/shopping-list'>Shopping List</a>
+                  <!-- ><a routerLink='/home'>Home</a></li> -->
+                  <!-- <a href="#" (click)="emitState('shopping')">Shopping List</a> -->
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown" appDropdown>
@@ -21,6 +28,6 @@
                 </li>
             </ul>
         </div>
-       
+
     </div>    <!-- end container-fluid -->
 </nav>
