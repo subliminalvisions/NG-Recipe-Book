@@ -32,22 +32,22 @@ export class RecipeDetailComponent implements OnInit {
       (params: Params) => {
         this.id = +params['id'];
         this.recipe = this.recipeService.getRecipebyID(this.id);
-        // if (params['id']) {
-        // }
-        // else {
-        //   this.server = this.serversService.getServer(1);
-        // }
+        // if (params['id']) { }
+        // else { this.server = this.serversService.getServer(1); }
         // this.serverName = this.server.name;
         // this.serverStatus = this.server.status;
       }
     );
     // const id = +this.route.snapshot.paramMap.get('slug');
-
     console.log(this.recipe);
   }
   addToShopping(): void {
-    // console.log('ingreds', this.recipe.ingredients);
-    // this.recipeService.addIngredientsToShopList(this.recipe.ingredients);
+    console.log('ingreds', this.recipe.ingredients);
+    this.recipeService.addIngredientsToShopList(this.recipe.ingredients);
+  }
+  onEditRecipe(): void {
+    this.router.navigate(['edit'], { relativeTo: this.route });
+    // this.router.navigate(['../', this.id, 'edit'], { relativeTo: this.route });
   }
 
 }
