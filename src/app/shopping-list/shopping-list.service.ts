@@ -1,24 +1,28 @@
 // import { Injectable } from '@angular/core';\
-import { EventEmitter } from "@angular/core";
-import { Ingredient } from "../shared/ingredient.model";
+// import { EventEmitter } from '@angular/core';
+import { Subject } from 'rxjs';
+import { Ingredient } from '../shared/ingredient.model';
 // @Injectable()
 export class ShoppingListService {
-    ingredientsChanged = new EventEmitter<Ingredient[]>();
+    ingredientsChanged = new Subject<Ingredient[]>();
     private ingredients: Ingredient[] = [
         new Ingredient('Apples', 5),
         new Ingredient('Tomatoes', 11)
       ];
-    addIngredient(ingredient: Ingredient) {
-        console.log('add ing')
+    addIngredient(ingredient: Ingredient): void {
+        console.log('add ing');
         this.ingredients.push(ingredient);
-        this.ingredientsChanged.emit(this.ingredients.slice());
+        this.ingredientsChanged.next(this.ingredients.slice());
     }
-    addMultiples(ingredients: Ingredient[]) {
-        this.ingredients.push(...ingredients)
-        this.ingredientsChanged.emit(this.ingredients.slice());
+    addMultiples(ingredients: Ingredient[]): void {
+        // for (let ingredient of ingredients) {
+        //   this.addIngredient(ingredient);
+        // }
+        this.ingredients.push(...ingredients);
+        this.ingredientsChanged.next(this.ingredients.slice());
     }
-    getIngredients() {
-        // reminder: slice returns a copy (non-mutating)
+    getIngredients(): Ingredient[] {
+        // (reminder: slice is non-mutating)
         return this.ingredients.slice();
     }
 

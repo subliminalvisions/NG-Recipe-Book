@@ -6,12 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'recipe book app';
-  // currentCompo = 'shopping';
-
-  // showCurrentCompo($event) {
-  //   this.currentCompo = $event;
-  //   console.log(this.currentCompo);
-  // }
+  title = 'Recipe Book App';
 
 }
