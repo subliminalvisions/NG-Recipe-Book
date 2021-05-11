@@ -21,7 +21,7 @@ const routes: Routes = [
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'no-recipe' },
       { path: 'no-recipe', component: NoRecipeSelectedComponent },
-      { path: 'new', component: RecipeEditComponent },
+      { path: 'new', component: AddRecipeComponent },
       { path: ':id', component: RecipeDetailComponent },
       { path: ':id/edit', component: RecipeEditComponent },
     ] },

@@ -38,6 +38,10 @@ export class RecipeService {
         // reminder: slice returns a copy
         return this.recipes.slice();
     }
+    addRecipe(recipe: Recipe): void {
+        // reminder: slice returns a copy
+        this.recipes.push(recipe);
+    }
     getRecipebyID(index: number): Recipe {
       return this.recipes[index];
       // const recipeWithID = this.recipes.find(

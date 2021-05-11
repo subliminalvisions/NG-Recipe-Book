@@ -1,41 +1,58 @@
 <div class="row">
     <div class="col-xs-12">
         <form>
+          <form (ngSubmit)="onAddItem(f)" #f="ngForm">
             <div class="row">
+                <!-- [formGroup]="shoppingForm" -->
+
                 <div class="col-sm-5 form-group">
                     <label for="name">Name</label>
-                    <input 
-                    type="text" 
-                    id="name" 
+                    <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    ngModel
+                    required
                     class="form-control"
-                    #nameInput
                     >
+                    <!-- formControlName="itemName"  -->
+                    <!-- #nameInput -->
                 </div>
                 <div class="col-sm-2 form-group">
                     <label for="amount">Amount</label>
-                    <input 
-                    type="numbertext" 
-                    id="amount" 
+                    <input
+                    type="numbertext"
+                    id="amount"
                     class="form-control"
-                    #amountInput
+                    ngModel
+                    required
+                    name="amount"
+                    pattern="^[1-9]+[0-9]*$"
                     >
+                    <!-- formControlName="quantity"  -->
+                    <!-- #amountInput -->
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <button 
-                    class="btn btn-success" 
-                    type="button"
-                    (click)="onPushIngredFromList()"
-                    >Add</button>
-                    <button class="btn btn-danger" type="button">Delete</button>
-                    <button class="btn btn-primary" type="button">Clear</button>
-                </div>
-            </div>
 
+                <!-- <div class="formButtons">
+
+                </div> -->
+
+                <div class="row">
+                  <div class="col-xs-12">
+                    <button
+                    class="btn btn-success"
+                    type="submit"
+                    [disabled]="!f.valid"
+                    >{{ editMode ? 'Update' : 'Add'}}</button>
+                    <button class="btn btn-danger"  (click)="onRemoveItem(f)" type="button">Delete</button>
+                    <button class="btn btn-primary" (click)="onReset(f)" type="button">Clear</button>
+                  </div>
+               </div>
+              </div>
+
+              </form>
 
         </form>
-
 
     </div>
 </div>

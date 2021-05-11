@@ -5,6 +5,8 @@ import { Ingredient } from '../shared/ingredient.model';
 // @Injectable()
 export class ShoppingListService {
     ingredientsChanged = new Subject<Ingredient[]>();
+    startedEditing = new Subject<number>();
+
     private ingredients: Ingredient[] = [
         new Ingredient('Apples', 5),
         new Ingredient('Tomatoes', 11)
@@ -13,6 +15,18 @@ export class ShoppingListService {
         console.log('add ing');
         this.ingredients.push(ingredient);
         this.ingredientsChanged.next(this.ingredients.slice());
+    }
+    updateIngredient(index: number, newIngredient: Ingredient) {
+        this.ingredients[index] = newIngredient;
+        this.ingredientsChanged.next(this.ingredients.slice());
+    }
+    removeIngredient(index: number, newIngredient: Ingredient) {
+      this.ingredients[index] = newIngredient;
+      // const index = this.ingredients.indexOf(newIngredient);
+      if (index > -1) {
+        this.ingredients.splice(index, 1);
+      }
+      this.ingredientsChanged.next(this.ingredients.slice());
     }
     addMultiples(ingredients: Ingredient[]): void {
         // for (let ingredient of ingredients) {
@@ -25,5 +39,9 @@ export class ShoppingListService {
         // (reminder: slice is non-mutating)
         return this.ingredients.slice();
     }
+    getIngredient(index: number) {
+      return this.ingredients[index];
+    }
+
 
 }
