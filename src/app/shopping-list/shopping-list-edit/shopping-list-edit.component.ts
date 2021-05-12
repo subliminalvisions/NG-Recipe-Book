@@ -34,42 +34,31 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
           })
         }
       );
-    // this.shoppingForm = new FormGroup({
-    //   'itemName': new FormControl(null, [Validators.required]),
-    //   'quantity': new FormControl(null, [Validators.required])
-    // });
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-  onRemoveItem(form: NgForm) {
-    // const index = array.indexOf(5);
-    // if (index > -1) {
-    //   array.splice(index, 1);
-    // }
-    const value = form.value;
-    // const name = this.shoppingForm.value.itemName;
-    // const amount = this.shoppingForm.value.quantity;
-    const newIngredient = new Ingredient( value.name, value.amount);
-    this.slService.removeIngredient(this.editedItemIndex, newIngredient);
-    form.reset();
 
+  onRemoveItem() {
+    this.slService.removeIngredient(this.editedItemIndex);
+    this.slForm.reset();
+    this.editMode = false;
   }
-
-  onReset(form: NgForm) {
-    form.reset();
+  onReset() {
+    this.slForm.reset();
+    this.editMode = false;
   }
   onAddItem(form: NgForm) {
     const value = form.value;
-    // const name = this.shoppingForm.value.itemName;
-    // const amount = this.shoppingForm.value.quantity;
     const newIngredient = new Ingredient( value.name, value.amount);
     if (this.editMode) {
       this.slService.updateIngredient(this.editedItemIndex, newIngredient);
     } else {
       this.slService.addIngredient(newIngredient);
     }
+    form.reset();
+    this.editMode = false;
   }
 
 }

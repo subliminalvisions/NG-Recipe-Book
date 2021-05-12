@@ -37,20 +37,6 @@ export class AddRecipeComponent implements OnInit {
       imagePath: 'https://img.sndimg.com/food/image/upload/q_92,fl_progressive,w_1200,c_scale/v1/img/recipes/30/32/45/tKqC3hipQA2MRyTEsneh_oven-bbq-ribs-02757.jpg',
     };
     this.recipeService.addRecipe(this.recipe);
-
-    // new Recipe(1, 'A First Recipe',
-    // 'Good Recipe Info',
-    // 'https://img.sndimg.com/food/image/upload/q_92,fl_progressive,w_1200,c_scale/v1/img/recipes/30/32/45/tKqC3hipQA2MRyTEsneh_oven-bbq-ribs-02757.jpg',
-    // [
-    //     new Ingredient('Meat', 1),
-    //     new Ingredient('Bread', 1)
-    // ]),
-
-
-    // this.recipe.name = this.recipeForm.value.recipeName;
-    // this.recipe.name = ;
-    // this.recipe.description = this.recipeForm.value.recipeDescription;
-    // this.recipe.ingredients = this.recipeForm.value.ingredients;
   }
 
 }

@@ -1,7 +1,6 @@
 <div class="row">
     <div class="col-xs-12">
-        <form>
-          <form (ngSubmit)="onAddItem(f)" #f="ngForm">
+        <form (ngSubmit)="onAddItem(f)" #f="ngForm">
             <div class="row">
                 <!-- [formGroup]="shoppingForm" -->
 
@@ -29,14 +28,7 @@
                     name="amount"
                     pattern="^[1-9]+[0-9]*$"
                     >
-                    <!-- formControlName="quantity"  -->
-                    <!-- #amountInput -->
                 </div>
-
-                <!-- <div class="formButtons">
-
-                </div> -->
-
                 <div class="row">
                   <div class="col-xs-12">
                     <button
@@ -44,16 +36,16 @@
                     type="submit"
                     [disabled]="!f.valid"
                     >{{ editMode ? 'Update' : 'Add'}}</button>
-                    <button class="btn btn-danger"  (click)="onRemoveItem(f)" type="button">Delete</button>
-                    <button class="btn btn-primary" (click)="onReset(f)" type="button">Clear</button>
+                    <button
+                    *ngIf="editMode"
+                    class="btn btn-danger"
+                    (click)="onRemoveItem()" type="button">Delete</button>
+                    <button class="btn btn-primary" (click)="onReset()" type="button">Clear</button>
                   </div>
                </div>
               </div>
 
-              </form>
-
         </form>
-
     </div>
 </div>
 

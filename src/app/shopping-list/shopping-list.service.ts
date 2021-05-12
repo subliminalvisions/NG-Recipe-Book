@@ -1,7 +1,7 @@
 // import { Injectable } from '@angular/core';\
-// import { EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Ingredient } from '../shared/ingredient.model';
+
 // @Injectable()
 export class ShoppingListService {
     ingredientsChanged = new Subject<Ingredient[]>();
@@ -20,18 +20,12 @@ export class ShoppingListService {
         this.ingredients[index] = newIngredient;
         this.ingredientsChanged.next(this.ingredients.slice());
     }
-    removeIngredient(index: number, newIngredient: Ingredient) {
-      this.ingredients[index] = newIngredient;
-      // const index = this.ingredients.indexOf(newIngredient);
-      if (index > -1) {
-        this.ingredients.splice(index, 1);
-      }
+    removeIngredient(index: number) {
+      this.ingredients.splice(index, 1);
       this.ingredientsChanged.next(this.ingredients.slice());
     }
+
     addMultiples(ingredients: Ingredient[]): void {
-        // for (let ingredient of ingredients) {
-        //   this.addIngredient(ingredient);
-        // }
         this.ingredients.push(...ingredients);
         this.ingredientsChanged.next(this.ingredients.slice());
     }
