@@ -1,1 +1,104 @@
-<p>recipe-edit works!</p>
+<p>edit-recipe form</p>
+
+<div class="row">
+  <div class="col-xs-12">
+
+
+
+
+<form [formGroup]="recipeForm" (ngSubmit)="onSubmitRecipe()">
+
+  <div class="row">
+    <div class="col-xs-12">
+      <button class="btn btn-success" type="submit">Submit</button>
+      <button class="btn btn-danger" type="button">Cancel</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text"
+        id="name"
+        formControlName="name"
+        class="form-control">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <label for="imagePath">Image Path</label>
+        <input type="text"
+        id="imagePath"
+        formControlName="imagePath"
+        class="form-control">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <img src="" class="img-responsive">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea type="text"
+        id="description"
+        formControlName="description"
+        rows="6"
+        class="form-control"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <!-- <label for="ingredients">ingredients</label> -->
+      <div class="form-group">
+
+        <div class="row">
+          <div class="col-xs-8">
+            <div class="form-group"
+            >
+            <!-- *ngFor="let ingredientItem of recipeForm.get('ingredients')['controls']; let i = index" -->
+              <input type="text" class="form-control" >
+            </div>
+          </div>
+          <div class="col-xs-2">
+            <input type="number" class="form-control" >
+
+          </div>
+          <div class="col-xs-2">
+            <button class="btn btn-danger"
+            type="button"
+            >
+            <!-- (click)="onAddIngredient()" -->
+            X</button>
+          </div>
+
+        </div>
+
+      </div>
+      <!-- <div class="err-msg">
+        <span
+        *ngIf="!recipeForm.valid && recipeForm.touched"
+        class="help-block">Please enter valid data</span>
+      </div> -->
+    </div>
+  </div>
+
+
+
+</form>
+</div>
+</div>
+
