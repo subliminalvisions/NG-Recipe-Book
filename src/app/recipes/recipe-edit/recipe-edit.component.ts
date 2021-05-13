@@ -3,6 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
 import { RecipeService } from '../recipe.service';
 import { Recipe } from '../recipe.model';
+import { Ingredient } from '../../shared/ingredient.model'
 
 @Component({
   selector: 'app-recipe-edit',
@@ -46,12 +47,11 @@ export class RecipeEditComponent implements OnInit {
           recipeIngredients.push(
             new FormGroup({
               'name': new FormControl(ingredient.name),
-              'amount': new FormControl(ingredient.amount),
+              'amount': new FormControl(ingredient.amount)
             })
-          )
+          );
         }
         // array.forEach(element => {
-
         // });
       }
     }
@@ -63,11 +63,15 @@ export class RecipeEditComponent implements OnInit {
     });
     // how to link up form with Recipe in Edit Mode???
   }
-  onAddIngredient() {
-    const control = new FormControl(null, Validators.required);
-    (<FormArray>this.recipeForm.get('ingredients')).push(control);
+  onAddIngredient(): void {
+    const ingredient = new Ingredient('', 1);
+    const control = new FormGroup({
+      name: new FormControl(ingredient.name),
+      amount: new FormControl(ingredient.amount)
+    });
+    (this.recipeForm.get('ingredients') as FormArray).push(control);
   }
-  onSubmitRecipe() {
+  onSubmitRecipe(): void {
     console.log(this.recipeForm);
     console.log(this.recipeForm.value.recipeName);
     // this.recipe = {
@@ -78,11 +82,7 @@ export class RecipeEditComponent implements OnInit {
     // };
     // this.recipeService.addRecipe(this.recipe);
   }
-
-  get controls() { // a getter!
-    const ingredients = (<FormArray>this.recipeForm.get('ingredients')).controls;
-    // console.log(ingredients);
-    return ingredients;
+  get controls(): any { // a getter!
+    return (<FormArray>this.recipeForm.get('ingredients')).controls;
   }
-
 }
