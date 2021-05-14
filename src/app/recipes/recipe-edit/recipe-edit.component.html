@@ -1,21 +1,20 @@
-<p>edit-recipe form</p>
-
 <div class="row">
   <div class="col-xs-12">
-
-
-
 
 <form [formGroup]="recipeForm" (ngSubmit)="onSubmitRecipe()">
 
   <div class="row">
-    <div class="col-xs-6">
-      <button class="btn btn-success" type="submit">Submit</button>
-    </div>
-    <div class="col-xs-6">
-      <button class="btn btn-danger" type="button">Cancel</button>
+    <div class="col-xs-12">
+      <button
+      class="btn btn-success"
+      [disabled]="!recipeForm.valid"
+      type="submit">Save</button>
+      <button class="btn btn-danger"
+      (click)="cancelEditing()"
+      type="button">Cancel</button>
     </div>
   </div>
+
 
   <div class="row">
     <div class="col-xs-12">
@@ -63,16 +62,9 @@
   </div>
 
   <div class="row">
-    <div class="col-xs-12 add text-right" >
-      <button class="btn btn-success"
-      type="button" (click)="onAddIngredient()"
-      >add 1 i</button>
-    </div>
-  </div>
-  <div class="row">
     <div class="col-xs-12" formArrayName="ingredients" >
       <div class="form-group">
-        <div class="row mb-5"
+        <div class="row"
         *ngFor="let ingredientCtrl of controls; let i = index"
         [formGroupName]="i"
         >
@@ -89,10 +81,11 @@
             class="form-control"  >
           </div>
           <div class="col-xs-2">
+
             <button class="btn btn-danger"
             type="button"
+            (click)="onDeleteIngredient(i)"
             >
-            <!-- (click)="onAddIngredient()" -->
             X</button>
           </div>
         </div>
@@ -104,6 +97,14 @@
         class="help-block">Please enter valid data</span>
       </div> -->
     </div>
+
+      <div class="col-xs-12 mb-5 add-one text-right" >
+        <button class="btn btn-success"
+        type="button"
+        (click)="onAddIngredient()"
+        >add ingredient</button>
+      </div>
+
   </div>
 
 

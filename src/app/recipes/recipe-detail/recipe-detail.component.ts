@@ -41,6 +41,11 @@ export class RecipeDetailComponent implements OnInit {
     // const id = +this.route.snapshot.paramMap.get('slug');
     console.log(this.recipe);
   }
+  deletItem(id: number): void {
+    this.recipeService.deleteRecipe(id);
+    this.router.navigate(['/recipes'], { relativeTo: this.route });
+  }
+
   addToShopping(): void {
     console.log('ingreds', this.recipe.ingredients);
     this.recipeService.addIngredientsToShopList(this.recipe.ingredients);

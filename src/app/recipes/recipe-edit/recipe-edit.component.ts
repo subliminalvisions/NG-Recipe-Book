@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
 import { RecipeService } from '../recipe.service';
 import { Recipe } from '../recipe.model';
@@ -18,6 +18,7 @@ export class RecipeEditComponent implements OnInit {
   recipe: Recipe;
 
   constructor(private route: ActivatedRoute,
+              private router: Router,
               private recipeService: RecipeService) { }
 
   ngOnInit(): void {
@@ -30,11 +31,11 @@ export class RecipeEditComponent implements OnInit {
       }
     );
   }
-  initForm() {
+  initForm(): void {
     let recipeName = '';
     let recipeImagePath = '';
     let recipeDescription = '';
-    let recipeIngredients = new FormArray([]);
+    const recipeIngredients = new FormArray([]);
 
     if (this.editMode) {
       const recipe = this.recipeService.getRecipebyID(this.id);
@@ -43,46 +44,80 @@ export class RecipeEditComponent implements OnInit {
       recipeImagePath = recipe.imagePath;
       recipeDescription = recipe.description;
       if (recipe['ingredients']) {
-        for (let ingredient of recipe.ingredients) {
+        for (const ingredient of recipe.ingredients) {
           recipeIngredients.push(
             new FormGroup({
-              'name': new FormControl(ingredient.name),
-              'amount': new FormControl(ingredient.amount)
+              name: new FormControl(ingredient.name, Validators.required),
+              amount: new FormControl(ingredient.amount,
+                [Validators.required,
+                Validators.pattern(/^[1-9]+[0-9]*$/)
+              ])
             })
           );
         }
-        // array.forEach(element => {
-        // });
       }
     }
     this.recipeForm = new FormGroup({
-      'name': new FormControl(recipeName, [Validators.required]),
-      'description': new FormControl(recipeDescription , [Validators.required]),
-      'imagePath': new FormControl(recipeImagePath, [Validators.required]),
-      'ingredients': recipeIngredients
+      name: new FormControl(recipeName, [Validators.required]),
+      imagePath: new FormControl(recipeImagePath, [Validators.required]),
+      description: new FormControl(recipeDescription , [Validators.required]),
+      ingredients: recipeIngredients
     });
-    // how to link up form with Recipe in Edit Mode???
   }
   onAddIngredient(): void {
-    const ingredient = new Ingredient('', 1);
-    const control = new FormGroup({
-      name: new FormControl(ingredient.name),
-      amount: new FormControl(ingredient.amount)
-    });
-    (this.recipeForm.get('ingredients') as FormArray).push(control);
+    (this.recipeForm.get('ingredients') as FormArray).push(
+      new FormGroup({
+        name: new FormControl(null, Validators.required),
+        amount: new FormControl(null, [Validators.required,
+          Validators.pattern(/^[1-9]+[0-9]*$/)
+        ])
+      })
+    );
   }
+  cancelEditing(): void {
+    // this.recipeForm.reset();
+    this.router.navigate(['../'], { relativeTo: this.route});
+  }
+//   deleteRecipe(index: number): void {
+    // put this in recipe service
+//     this.recipes.splice(index, 1);
+//     this.recipesChanged.next(this.recipes.slice());
+// }
+  onDeleteIngredient(index: number): void {
+    // console.log(i);
+    // ????
+    this.recipeForm.value['ingredients'].splice(index, 1);
+    const ingredients = (this.recipeForm.get('ingredients') as FormArray);
+    // ingredients = (this.recipeForm.get('ingredients') as FormArray);
+    // (this.recipeForm.get('ingredients').controls);
+    console.log(ingredients.controls);
+// ÷    (this.recipeForm.value)
+// ingredient.controls.splice(i, 1);
+  }
+
   onSubmitRecipe(): void {
-    console.log(this.recipeForm);
-    console.log(this.recipeForm.value.recipeName);
+    // const newRecipe = new Recipe(
+    //   this.recipeForm.value.recipeName,
+    //   this.recipeForm.value.description,
+    //   this.recipeForm.value.imagePath,
+    //   this.recipeForm.value['ingredients']);
+    if (this.editMode) {
+      console.log(this.recipeForm.value);
+      // console.log(this.recipeForm.value.recipeName);
+      this.recipeService.updateRecipe(this.id, this.recipeForm.value);
+    } else {
+      this.recipeService.addRecipe(this.recipeForm.value);
+    }
+    this.cancelEditing();
     // this.recipe = {
     //   name: this.recipeForm.value.recipeName,
     //   description: this.recipeForm.value.recipeName,
     //   ingredients: this.recipeForm.value.ingredients,
-    //   imagePath: 'https://img.sndimg.com/food/image/upload/q_92,fl_progressive,w_1200,c_scale/v1/img/recipes/30/32/45/tKqC3hipQA2MRyTEsneh_oven-bbq-ribs-02757.jpg',
+    //   imagePath: this.recipeForm.value.imagePath,
     // };
-    // this.recipeService.addRecipe(this.recipe);
   }
   get controls(): any { // a getter!
     return (<FormArray>this.recipeForm.get('ingredients')).controls;
+    // (this.recipeForm.get('ingredients') as FormArray)
   }
 }

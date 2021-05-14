@@ -17,17 +17,19 @@
 
             <ul class="dropdown-menu">
                 <li><a (click)="addToShopping()"
-                  style="cursor: pointer;"
+                  class="item"
                   >Add to Shopping List</a></li>
-                <li><a style="cursor: pointer;"
-                  (click)="onEditRecipe()"
-                  >
-                  <!-- [routerLink]="'edit'" -->
-                  Edit Recipe {{ id }} </a></li>
-                <li><a style="cursor: pointer;"
-                  >Delete Recipe</a></li>
-            </ul>
-        </div>
+                  <li><a class="item"
+                    (click)="onEditRecipe()"
+                    >
+                    <!-- [routerLink]="'edit'" -->
+                    Edit Recipe {{ id }} </a></li>
+                    <li><a
+                      class="item"
+                      (click)="deletItem(id)"
+                      >Delete Recipe</a></li>
+                    </ul>
+                  </div>
     </div>
 </div>
 <div class="row">

@@ -20,9 +20,9 @@ export class RecipeItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSelected(): void {
-    // this.recipeService.recipteSelected.emit(this.recipe);
-    this.router.navigate([this.recipe.id + '/edit'], { relativeTo: this.route, queryParamsHandling: 'preserve' });
-  }
+  // onSelected(): void {
+  //   // this.recipeService.recipteSelected.emit(this.recipe);
+  //   this.router.navigate([this.recipe.id + '/edit'], { relativeTo: this.route, queryParamsHandling: 'preserve' });
+  // }
 
 }
