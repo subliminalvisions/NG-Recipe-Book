@@ -24,26 +24,18 @@ export class RecipeDetailComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    console.log(this.route.snapshot.queryParams);
-    // this.paramsSubscirption = this.route.snapshot.params
 
     this.paramsSubscirption = this.route.params
     .subscribe(
       (params: Params) => {
         this.id = +params['id'];
         this.recipe = this.recipeService.getRecipebyID(this.id);
-        // if (params['id']) { }
-        // else { this.server = this.serversService.getServer(1); }
-        // this.serverName = this.server.name;
-        // this.serverStatus = this.server.status;
       }
     );
-    // const id = +this.route.snapshot.paramMap.get('slug');
-    console.log(this.recipe);
   }
   deletItem(id: number): void {
     this.recipeService.deleteRecipe(id);
-    this.router.navigate(['/recipes'], { relativeTo: this.route });
+    this.router.navigate(['/recipes']);
   }
 
   addToShopping(): void {
@@ -52,7 +44,6 @@ export class RecipeDetailComponent implements OnInit {
   }
   onEditRecipe(): void {
     this.router.navigate(['edit'], { relativeTo: this.route });
-    // this.router.navigate(['../', this.id, 'edit'], { relativeTo: this.route });
   }
 
 }

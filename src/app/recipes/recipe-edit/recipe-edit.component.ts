@@ -3,7 +3,6 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
 import { RecipeService } from '../recipe.service';
 import { Recipe } from '../recipe.model';
-import { Ingredient } from '../../shared/ingredient.model'
 
 @Component({
   selector: 'app-recipe-edit',
@@ -75,46 +74,21 @@ export class RecipeEditComponent implements OnInit {
     );
   }
   cancelEditing(): void {
-    // this.recipeForm.reset();
     this.router.navigate(['../'], { relativeTo: this.route});
   }
-//   deleteRecipe(index: number): void {
-    // put this in recipe service
-//     this.recipes.splice(index, 1);
-//     this.recipesChanged.next(this.recipes.slice());
-// }
+//   deleteRecipe(index: number): void {}
   onDeleteIngredient(index: number): void {
-    // console.log(i);
-    // ????
-    this.recipeForm.value['ingredients'].splice(index, 1);
-    const ingredients = (this.recipeForm.get('ingredients') as FormArray);
-    // ingredients = (this.recipeForm.get('ingredients') as FormArray);
-    // (this.recipeForm.get('ingredients').controls);
-    console.log(ingredients.controls);
-// ÷    (this.recipeForm.value)
-// ingredient.controls.splice(i, 1);
+    (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
+    // (<FormArray>this.recipeForm.get('ingredients')).clear();
   }
-
   onSubmitRecipe(): void {
-    // const newRecipe = new Recipe(
-    //   this.recipeForm.value.recipeName,
-    //   this.recipeForm.value.description,
-    //   this.recipeForm.value.imagePath,
-    //   this.recipeForm.value['ingredients']);
     if (this.editMode) {
       console.log(this.recipeForm.value);
-      // console.log(this.recipeForm.value.recipeName);
       this.recipeService.updateRecipe(this.id, this.recipeForm.value);
     } else {
       this.recipeService.addRecipe(this.recipeForm.value);
     }
     this.cancelEditing();
-    // this.recipe = {
-    //   name: this.recipeForm.value.recipeName,
-    //   description: this.recipeForm.value.recipeName,
-    //   ingredients: this.recipeForm.value.ingredients,
-    //   imagePath: this.recipeForm.value.imagePath,
-    // };
   }
   get controls(): any { // a getter!
     return (<FormArray>this.recipeForm.get('ingredients')).controls;
