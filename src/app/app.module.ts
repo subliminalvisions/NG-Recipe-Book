@@ -21,6 +21,7 @@ import { NoRecipeSelectedComponent } from './recipes/no-recipe-selected/no-recip
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { AuthComponent } from './auth/auth.cmponent';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { FormsModule } from '@angular/forms';
     AddRecipeComponent,
     DropdownDirective,
     NoRecipeSelectedComponent,
+    AuthComponent,
     RecipeEditComponent
   ],
   imports: [
