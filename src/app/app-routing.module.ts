@@ -13,6 +13,7 @@ import { RecipesComponent } from './recipes/recipes.component';
 import { AddRecipeComponent } from './recipes/add-recipe/add-recipe.component';
 import { NoRecipeSelectedComponent } from './recipes/no-recipe-selected/no-recipe-selected.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+import { RecipeResolverService } from './recipes/recipes-resolver.service';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'recipes' },
@@ -22,8 +23,8 @@ const routes: Routes = [
       { path: '', pathMatch: 'full', redirectTo: 'no-recipe' },
       { path: 'no-recipe', component: NoRecipeSelectedComponent },
       { path: 'new', component: RecipeEditComponent },
-      { path: ':id', component: RecipeDetailComponent },
-      { path: ':id/edit', component: RecipeEditComponent },
+      { path: ':id', component: RecipeDetailComponent, resolve: [RecipeResolverService] },
+      { path: ':id/edit', component: RecipeEditComponent, resolve: [RecipeResolverService] },
     ] },
 ];
 

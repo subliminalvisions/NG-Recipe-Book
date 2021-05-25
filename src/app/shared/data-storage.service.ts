@@ -3,6 +3,8 @@ import { Recipe } from '../recipes/recipe.model';
 import { RecipeService } from '../recipes/recipe.service';
 import { FirebaseDbInfo } from 'src/environments/firebase-db-info';
 import { HttpClient } from '@angular/common/http';
+import { map, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 // import { Injectable } from '@angular/core';
 // import { Post } from './post.model';
@@ -32,13 +34,25 @@ export class DataStorageService {
       }
     );
   }
-  // fetchRecipes(): Observable<Recipe[]> {
-  fetchRecipes(): void {
-    this.http.get<Recipe[]>(this.firebase.dbUrl)
-    .subscribe(recipes => {
-      console.log(recipes);
-      this.recipeService.setRecipes(recipes);
-    });
+  fetchRecipes(): Observable<Recipe[]> {
+  // fetchRecipes(): void {
+    return this.http.get<Recipe[]>(this.firebase.dbUrl)
+    .pipe(
+      map(
+      recipes => {
+        return recipes.map(recipe => {
+          // ensure that ingredients is at least always set to something
+          return {...recipe, ingredients: recipe.ingredients ? recipe.ingredients : [] }
+        });
+      }),
+      tap(recipes => {
+        this.recipeService.setRecipes(recipes);
+      })
+    );
+    // .subscribe(recipes => {
+    //   console.log(recipes);
+    //   this.recipeService.setRecipes(recipes);
+    // });
   }
 
   // (method) DataStorageService.fetchPosts(): Observable<Recipe[]>
