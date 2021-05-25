@@ -61,7 +61,7 @@ export class RecipeService {
     // );
     // return recipeWithID;
 
-    addIngredientsToShopList(ingredients: Ingredient[]) {
+    addIngredientsToShopList(ingredients: Ingredient[]): void {
         this.slService.addMultiples(ingredients);
     }
 

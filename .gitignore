@@ -1,5 +1,9 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# hide fb db info
+/src/environments/firebase-db-info.ts
+src/environments/firebase-db-info.ts
+
 # compiled output
 /dist
 /tmp
