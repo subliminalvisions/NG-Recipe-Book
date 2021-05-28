@@ -1,9 +1,13 @@
-import { Injectable } from "@angular/core";
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
-import { DataStorageService } from "../shared/data-storage.service";
-import { Recipe } from "./recipe.model";
-import { RecipeService } from "./recipe.service";
-import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import {
+  Resolve,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot
+} from '@angular/router';
+
+import { Recipe } from './recipe.model';
+import { DataStorageService } from '../shared/data-storage.service';
+import { RecipeService } from './recipe.service';
 
 @Injectable({providedIn: 'root'})
 export class RecipeResolverService implements Resolve<Recipe[]> {
@@ -12,9 +16,19 @@ export class RecipeResolverService implements Resolve<Recipe[]> {
     private dataStorageService: DataStorageService,
     private recipesService: RecipeService) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Recipe[] | Observable<Recipe[]> {
-    // check if we do have new recipes and only fethc new ones if we dont
+  // resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  //   // check if we do have new recipes and only fethc new ones if we dont
+  //   const recipes = this.recipesService.getRecipes();
+  //   if (recipes.length === 0) {
+  //     return this.dataStorageService.fetchRecipes();
+  //   } else {
+  //     return recipes;
+  //   }
+  // }
+
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const recipes = this.recipesService.getRecipes();
+
     if (recipes.length === 0) {
       return this.dataStorageService.fetchRecipes();
     } else {

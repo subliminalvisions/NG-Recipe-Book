@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { Recipe } from '../recipes/recipe.model';
 import { RecipeService } from '../recipes/recipe.service';
 import { FirebaseDbInfo } from 'src/environments/firebase-db-info';
-import { HttpClient } from '@angular/common/http';
-import { map, tap } from 'rxjs/operators';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { exhaustMap, map, take, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-
+import { AuthService } from '../auth/auth.service';
 // import { Injectable } from '@angular/core';
 // import { Post } from './post.model';
 // import { HttpClient, HttpHeaders, HttpParams, HttpEventType } from '@angular/common/http';
@@ -18,6 +18,7 @@ export class DataStorageService {
   constructor(
     private http: HttpClient,
     private recipeService: RecipeService,
+    private authService: AuthService,
     private firebase: FirebaseDbInfo
     ) {}
 
@@ -34,11 +35,19 @@ export class DataStorageService {
       }
     );
   }
-  fetchRecipes(): Observable<Recipe[]> {
+
+  fetchRecipes() {
   // fetchRecipes(): void {
-    return this.http.get<Recipe[]>(this.firebase.dbUrl)
-    .pipe(
-      map(
+    return this.authService.user.pipe(take(1), exhaustMap(user => {
+      // firbase wants token as query param
+      return this.http.get<Recipe[]>(
+        this.firebase.dbUrl,
+          {
+            params: new HttpParams().set('auth', user.token)
+          }
+        );
+    }),
+    map(
       recipes => {
         return recipes.map(recipe => {
           // ensure that ingredients is at least always set to something
@@ -49,6 +58,13 @@ export class DataStorageService {
         this.recipeService.setRecipes(recipes);
       })
     );
+    // .subscribe(user => {
+    // });
+    // this "take" operatior will only grab the latest user and then unsubscribes
+
+    // .pipe(
+
+    // );
     // .subscribe(recipes => {
     //   console.log(recipes);
     //   this.recipeService.setRecipes(recipes);

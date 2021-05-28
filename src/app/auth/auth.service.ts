@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-// import { Observable,  } from 'rxjs';
+import { BehaviorSubject, Observable,  } from 'rxjs';
 import { catchError, tap } from "rxjs/operators";
 import { throwError, Subject } from "rxjs";
 
@@ -21,15 +21,21 @@ export interface AuthResponseData {
 @Injectable({providedIn: 'root'})
 export class AuthService {
 
-  user = new Subject<User>();
+  // user = new Subject<User>();
+  // token: string = null;
+  user = new BehaviorSubject<User>(null);
+  // BehaviorSubject provides immediate access
+  // to the last emitted value even if the user had not previously subscribed
+
 
   constructor(
     private http: HttpClient,
     private firebase: FirebaseDbInfo
     ) {}
 
-  signup(email: string, password: string) {
-    // return this.http.get<Recipe[]>(this.firebase.dbUrl)
+  signup(email: string, password: string): Observable<AuthResponseData> {
+    // removing ": Observable<AuthResponseData>" as a return type
+    // on this method resolved my error in auth.component.ts
     return this.http
     .post<AuthResponseData>(
       'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key='
@@ -53,7 +59,7 @@ export class AuthService {
     );
   }
 
-  login(email: string, password: string) {
+  login(email: string, password: string): Observable<AuthResponseData> {
     return this.http
     .post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key='
       + this.firebase.key,
