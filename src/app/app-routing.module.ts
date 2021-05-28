@@ -14,7 +14,7 @@ import { AddRecipeComponent } from './recipes/add-recipe/add-recipe.component';
 import { NoRecipeSelectedComponent } from './recipes/no-recipe-selected/no-recipe-selected.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeResolverService } from './recipes/recipes-resolver.service';
-import { AuthComponent } from './auth/auth.cmponent';
+import { AuthComponent } from './auth/auth.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'recipes' },
