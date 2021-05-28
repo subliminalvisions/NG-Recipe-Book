@@ -34,23 +34,6 @@ export class AuthComponent {
     } else {
       console.log('isLoginMode', this.isLoginMode);
       authObs = this.authService.signup(email, password);
-
-      // this.authService.signup(email, password).subscribe(
-      //   resData => {
-      //     this.isLoading = false;
-      //     console.log(resData);
-      //   },
-      //   errorMessage => {
-      //     console.log('errorMessage', errorMessage);
-      //     this.error = errorMessage;
-      //     this.isLoading = false;
-      //   }
-      // );
-
-      // authObs = this.authService.signup(email, password);
-      /// ummmm   Type '{}' is missing the following properties from
-      // type 'AuthResponseData': kind, idToken, email, refreshToken,
-      // and 2 more.
     }
 
     authObs.subscribe(
