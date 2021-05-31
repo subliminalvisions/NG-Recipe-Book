@@ -29,7 +29,6 @@ export class AuthService {
   // BehaviorSubject provides immediate access
   // to the last emitted value even if the user had not previously subscribed
 
-
   constructor(
     private http: HttpClient,
     private router: Router,
