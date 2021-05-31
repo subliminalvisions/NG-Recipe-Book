@@ -33,7 +33,7 @@
               <li class="nav-item"
               *ngIf="isAuthenticated"
               >
-                <a role="button">Logout</a>
+                <a role="button" (click)="onLogout()">Logout</a>
               </li>
                 <li class="dropdown" appDropdown>
                     <a

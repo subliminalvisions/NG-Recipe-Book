@@ -15,10 +15,14 @@ import { NoRecipeSelectedComponent } from './recipes/no-recipe-selected/no-recip
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeResolverService } from './recipes/recipes-resolver.service';
 import { AuthComponent } from './auth/auth.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'recipes' },
-  { path: 'recipes', component: RecipesComponent,
+  {
+    path: 'recipes',
+    component: RecipesComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'no-recipe' },
       { path: 'no-recipe', component: NoRecipeSelectedComponent },
