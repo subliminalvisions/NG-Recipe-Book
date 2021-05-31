@@ -4,7 +4,13 @@
     <!-- <div class="aler alert-danger" *ngIf="error">
       <p>{{ error }} </p>
     </div> -->
-    <app-alert [message]="error" *ngIf="error" (closeAlertBox)="onHandleErrorClose()"></app-alert>
+    <!-- ngIf is recommended way to hanlde dynamic components -->
+    <!-- <app-alert [message]="error" *ngIf="error" (closeAlertBox)="onHandleErrorClose()"></app-alert> -->
+
+    <!-- Angular needs a ViewContainerRef -->
+    <!-- <div #addHere></div> -->
+
+    <ng-template appPlaceholder ></ng-template>
 
     <div class="loading text-center" *ngIf="isLoading">
       <app-loading-spinner></app-loading-spinner>
