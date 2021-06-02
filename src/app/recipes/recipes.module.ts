@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 // import { SharedModule } from '../shared/shared.module';
 
 import { AddRecipeComponent } from './add-recipe/add-recipe.component';
@@ -11,6 +11,7 @@ import { RecipeItemComponent } from './recipe-list/recipe-item/recipe-item.compo
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { RecipesRoutingModule } from './recipes-routing.module';
 import { RecipesComponent } from './recipes.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { RecipesComponent } from './recipes.component';
     RouterModule,
     ReactiveFormsModule,
     RecipesRoutingModule,
-    // SharedModule
+    SharedModule,
     // you only have access to what you import
   ]
 })
