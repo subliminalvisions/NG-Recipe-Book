@@ -35,7 +35,9 @@
               >
                 <a role="button" (click)="onLogout()">Logout</a>
               </li>
-                <li class="dropdown" appDropdown>
+                <li class="dropdown"
+                *ngIf="isAuthenticated"
+                appDropdown>
                     <a
                     class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>
                     <ul class="dropdown-menu">
