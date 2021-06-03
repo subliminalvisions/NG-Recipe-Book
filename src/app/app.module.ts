@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { RecipesModule } from './recipes/recipes.module';
+// import { RecipesModule } from './recipes/recipes.module';
 import { ShoppingListModule } from './shopping-list/shopping-list.module';
 
 import { SharedModule } from './shared/shared.module';
@@ -24,7 +24,7 @@ import { AuthModule } from './auth/auth.module';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    RecipesModule,
+    // RecipesModule,
     ShoppingListModule,
     SharedModule,
     CoreModule,
