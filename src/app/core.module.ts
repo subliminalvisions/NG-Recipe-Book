@@ -13,6 +13,7 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
       multi: true
+
     }
   ]
   // only declarations and extra modules need to be exported
