@@ -15,7 +15,8 @@ import { AuthComponent } from './auth.component';
     SharedModule,
     CoreModule,
     FormsModule,
-    RouterModule.forChild([{ path: 'auth', component: AuthComponent }])
+    // RouterModule.forChild([{ path: 'auth', component: AuthComponent }])
+    RouterModule.forChild([{ path: '', component: AuthComponent }])
     // AuthInterceptorService
     // can't decouple from CoreMod
   ],
@@ -23,6 +24,4 @@ import { AuthComponent } from './auth.component';
   // imports: [,
   exports: [RouterModule]
 })
-export class AuthModule {
-
-}
+export class AuthModule {}
